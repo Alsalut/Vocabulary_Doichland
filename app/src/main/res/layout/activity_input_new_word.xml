@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".InputNewWord">
+
+    <Button
+        android:id="@+id/btn_save_new_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red_light"
+        android:text="@string/str_save_to_vocabulary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_new_word"
+        app:layout_constraintEnd_toEndOf="@+id/et_new_word"
+        app:layout_constraintStart_toStartOf="@+id/et_new_word"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_new_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/str_new_word"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_new_answer"
+        app:layout_constraintEnd_toEndOf="@+id/et_new_answer"
+        app:layout_constraintStart_toStartOf="@+id/et_new_answer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_new_word" />
+
+    <EditText
+        android:id="@+id/et_new_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/str_new_answer"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_new_word" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

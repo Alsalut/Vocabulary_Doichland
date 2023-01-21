@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_add_new_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red_light"
+        android:textColor="@color/white"
+        android:text="@string/str_add_new_word"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_word"
+        app:layout_constraintEnd_toEndOf="@+id/tv_word"
+        app:layout_constraintStart_toStartOf="@+id/tv_word"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_see_answer"
+        app:layout_constraintEnd_toEndOf="@+id/tv_see_answer"
+        app:layout_constraintStart_toStartOf="@+id/tv_see_answer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_new_word" />
+
+    <TextView
+        android:id="@+id/tv_see_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_see_answer"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next_word"
+        app:layout_constraintEnd_toEndOf="@+id/btn_next_word"
+        app:layout_constraintStart_toStartOf="@+id/btn_next_word"
+        app:layout_constraintTop_toBottomOf="@+id/tv_word" />
+
+    <Button
+        android:id="@+id/btn_next_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="@string/str_next_word"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_see_answer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
