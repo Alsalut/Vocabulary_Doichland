@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Словарь</string>
+    <string name="str_no_word">Словарь пуст</string>
     <string name="str_add_new_word">Добавить новое слово</string>
     <string name="str_see_answer">Увидеть ответ</string>
     <string name="str_new_word">Введите новое слово</string>
