@@ -3,8 +3,8 @@
     <string name="str_no_word">Словарь пуст</string>
     <string name="str_add_new_word">Добавить новое слово</string>
     <string name="str_see_answer">Увидеть ответ</string>
-    <string name="str_new_word">Введите новое слово</string>
+    <string name="str_foreign_word">Введите иностранное слово</string>
     <string name="str_new_answer">Введите перевод</string>
-    <string name="str_save_to_vocabulary">Добавить в словарь</string>
+    <string name="str_save_to_vocabulary">Сохранить в словарь</string>
     <string name="str_next_word">Следующее слово</string>
 </resources>

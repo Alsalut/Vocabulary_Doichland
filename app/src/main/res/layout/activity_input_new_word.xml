@@ -9,21 +9,20 @@
 
     <Button
         android:id="@+id/btn_save_new_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red_light"
+        style="@style/style_btn"
+        android:backgroundTint="@color/orange_light"
         android:text="@string/str_save_to_vocabulary"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_new_word"
-        app:layout_constraintEnd_toEndOf="@+id/et_new_word"
-        app:layout_constraintStart_toStartOf="@+id/et_new_word"
+        app:layout_constraintBottom_toTopOf="@+id/et_new_foreign_word"
+        app:layout_constraintEnd_toEndOf="@+id/et_new_foreign_word"
+        app:layout_constraintStart_toStartOf="@+id/et_new_foreign_word"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_new_word"
+        android:id="@+id/et_new_foreign_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/str_new_word"
+        android:autofillHints=""
+        android:hint="@string/str_foreign_word"
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/et_new_answer"
@@ -35,12 +34,13 @@
         android:id="@+id/et_new_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:hint="@string/str_new_answer"
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_word" />
+        app:layout_constraintTop_toBottomOf="@+id/et_new_foreign_word" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
