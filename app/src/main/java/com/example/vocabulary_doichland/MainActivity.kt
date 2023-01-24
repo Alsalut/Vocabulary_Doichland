@@ -2,19 +2,19 @@ package com.example.vocabulary_doichland
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-const val tag = "myTag"
 const val keyMemory = "local_memory"
-const val keyWords = "keyWords"
-const val keyAnswers = "keyAnswers"
-const val keyIntent = "keyIntent"
+const val keyWords = "words"
+const val keyAnswers = "answers"
 const val strSplit = "&split&"
 const val strPlug = "strPlug" // строка-заглушка, если в sharedPreferences ничего нет
-val mapWords = mutableMapOf<String, String>()
-var indexMap = 0
+var countWord = 0
+val listWords = mutableListOf<String>()
+val listAnswers = mutableListOf<String>()
 
 class MainActivity : AppCompatActivity()
 {
@@ -28,10 +28,6 @@ class MainActivity : AppCompatActivity()
     {
         super.onStart()
 
-        // устанавливаем индекс равным 0
-        indexMap = 0
-
-        // получаем строку из лок. памяти
         val sharedPreferences = getSharedPreferences(keyMemory, MODE_PRIVATE)
 
         // очищаем sharedPreferences
@@ -39,84 +35,64 @@ class MainActivity : AppCompatActivity()
 //        editor.clear()
 //        editor.apply()
 
+        // получаем строку из лок. памяти
         val strWords = sharedPreferences.getString(keyWords, strPlug)
         val strAnswers = sharedPreferences.getString(keyAnswers, strPlug)
 
-        // проверка наличия данных в памяти
-        checkDataFromMemory(strWords)
+        // заполняем массивы
+        val arrWords = strWords!!.split(strSplit)
+        val arrAnswers = strAnswers!!.split(strSplit)
 
-        // заполняем Map
-        fillMap(strWords, strAnswers, mapWords)
-        
-        // заполняем список рандомными ключами
-        val listRandomKeys = mapWords.keys.shuffled(Random(System.currentTimeMillis()))
+        // заполняем списки
+        for (index in 0 until arrWords.size)
+        {
+            listWords.add(arrWords[index])
+            listAnswers.add(arrAnswers[index])
+        }
+
+        // удаляем строки-заглушки strPlug
+        listWords.remove(strPlug)
+        listAnswers.remove(strPlug)
+
+        // заполняем список-shuffled
+        val listRandomIndex = mutableListOf<Int>()
+
+        if (listWords.size == 0) listRandomIndex.add(0)
+        else for (index in listWords.indices) listRandomIndex.add(index)
+
+        // перемешиваем listRandomIndex
+        listRandomIndex.shuffle()
 
         // выводим первое случайное слово
-        showWord(listRandomKeys)
+        if (listWords.size == 0)
+        {
+            tv_word.text = getText(R.string.str_no_word)
+            tv_see_answer.visibility = View.INVISIBLE
+            btn_next_word.visibility = View.INVISIBLE
+        }
+        else
+        {
+            tv_word.text = listWords[listRandomIndex[countWord]]
+            tv_see_answer.visibility = View.VISIBLE
+            btn_next_word.visibility = View.VISIBLE
+        }
 
         // при нажатии на tv_see_answer показываем в нём ответ
         tv_see_answer.setOnClickListener {
-            showAnswer(mapWords, listRandomKeys)
+            tv_see_answer.text = listAnswers[listRandomIndex[countWord]]
         }
 
         // при нажатии на кнопку "Следующее слово" выводим следующий элемент, и далее по кругу
         btn_next_word.setOnClickListener {
-            // задаём следующий индекс
-            indexMap = if (indexMap == (mapWords.size - 1)) 0 else ++indexMap
-
-            // показываем следующее слово
-            showWord(listRandomKeys)
+            countWord = if (countWord >= (listWords.size - 1)) 0 else (countWord + 1)
+            tv_see_answer.text = getText(R.string.str_see_answer)
+            tv_word.text = listWords[listRandomIndex[countWord]]
         }
 
         // при нажатии на кнопку "Добавить новое слово" переходим в InputNewWord
         btn_add_new_word.setOnClickListener {
-            changeActivity(getString(R.string.str_foreign_word))
+            startActivity(Intent(this, InputNewWord::class.java))
         }
-    }
-
-    // проверка наличия данных в памяти
-    private fun checkDataFromMemory(strDataFromMemory: String?)
-    {
-        if (strDataFromMemory == strPlug) changeActivity(strDataFromMemory)
-    }
-
-    // переходим в InputNewWord со строкой-значением
-    private fun changeActivity(strValue: String)
-    {
-        val intent = Intent(this, InputNewWord::class.java)
-        intent.putExtra(keyIntent, strValue)
-        startActivity(intent)
-    }
-
-    // заполняем Map
-    private fun fillMap(strSplitKey: String?, strSplitValue: String?, mapValue: MutableMap<String, String>)
-    {
-        // заполняем массивы из строк
-        val arrKey = strSplitKey?.split(strSplit)
-        val arrValue = strSplitValue?.split(strSplit)
-
-        // очищаем mapValue
-        mapValue.clear()
-
-        // из массивов заполняем Map
-        for (index in 0 until arrKey!!.size) mapValue[arrKey[index]] = arrValue!![index]
-    }
-
-    // выводим случайное слово
-    private fun showWord(listRandomKeys: List<String>)
-    {
-        // выводим в tv_word очередное слово
-        tv_word.text = listRandomKeys[indexMap]
-
-        // выводим в tv_see_answer "Увидеть ответ"
-        tv_see_answer.text = getText(R.string.str_see_answer)
-    }
-
-    // выводим ответ
-    private fun showAnswer(mapValue: MutableMap<String, String>, listRandomKeys: List<String>)
-    {
-        // выводим в tv_see_answer ответ
-        tv_see_answer.text = mapValue[listRandomKeys[indexMap]]
     }
 
     // при нажатии "Назад" закрываем приложение и удаляем его из списка программ

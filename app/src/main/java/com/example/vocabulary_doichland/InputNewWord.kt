@@ -14,26 +14,19 @@ class InputNewWord : AppCompatActivity()
         val sharedPreferences = getSharedPreferences(keyMemory, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
-        // получаем строку из Intent
-        val strIntent = intent.getStringExtra(keyIntent)
-
-        // замена текста в et_new_foreign_word
-        if(strIntent == strPlug) et_new_foreign_word.hint = "${getText(R.string.str_no_word)}\n${getText(R.string.str_foreign_word)}"
-
         // добавляем новый элемент в sharedPreferences
         btn_save_new_word.setOnClickListener {
-            if (et_new_foreign_word.text.toString().isBlank() or et_new_answer.text.toString().isBlank()) return@setOnClickListener
+            if (et_new_word.text.toString().isBlank() or et_new_answer.text.toString().isBlank()) return@setOnClickListener
 
-            // если в памяти ничего не было, то... - иначе...
-            if (strIntent == strPlug)
+            if (listWords.isNotEmpty())
             {
-                editor.putString(keyWords, et_new_foreign_word.text.toString())
-                editor.putString(keyAnswers, et_new_answer.text.toString())
+                editor.putString(keyWords, "${sharedPreferences.getString(keyWords, strPlug)}$strSplit${et_new_word.text}")
+                editor.putString(keyAnswers, "${sharedPreferences.getString(keyAnswers, strPlug)}$strSplit${et_new_answer.text}")
             }
             else
             {
-                editor.putString(keyWords, "${sharedPreferences.getString(keyWords, strPlug)}$strSplit${et_new_foreign_word.text}")
-                editor.putString(keyAnswers, "${sharedPreferences.getString(keyAnswers, strPlug)}$strSplit${et_new_answer.text}")
+                editor.putString(keyWords, et_new_word.text.toString())
+                editor.putString(keyAnswers, et_new_answer.text.toString())
             }
 
             editor.apply()
