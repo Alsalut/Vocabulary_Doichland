@@ -19,28 +19,20 @@
 
     <EditText
         android:id="@+id/et_new_foreign_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/str_foreign_word"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/et_new_answer"
         app:layout_constraintEnd_toEndOf="@+id/et_new_answer"
         app:layout_constraintStart_toStartOf="@+id/et_new_answer"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_new_word" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_new_word"
+        style="@style/style_et" />
 
     <EditText
         android:id="@+id/et_new_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/str_new_answer"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_foreign_word" />
+        app:layout_constraintTop_toBottomOf="@+id/et_new_foreign_word"
+        style="@style/style_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
